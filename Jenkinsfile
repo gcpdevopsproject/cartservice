@@ -6,7 +6,7 @@ pipeline {
     FE_SVC_NAME = "${APP_NAME}-cartservice"
     CLUSTER = "cluster-1"
     CLUSTER_ZONE = "us-central1-c"
-    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}"
+    IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}:${BUILD_NUMBER}"
     JENKINS_CRED = "${PROJECT}"
   }
 
@@ -65,6 +65,8 @@ spec:
           
           sh "gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project ordinal-torch-377801"
           sh "kubectl apply -f cartservice.yaml"
+          sh "kubectl apply -f cartservice.yaml"
+          sh 'kubectl set image deployments/cartservice server=${IMAGE_TAG}
         }
       }
     }
