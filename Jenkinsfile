@@ -2,8 +2,8 @@ pipeline {
 
   environment {
     PROJECT = "ordinal-torch-377801"
-    APP_NAME = "frontendservice"
-    FE_SVC_NAME = "${APP_NAME}-frontend"
+    APP_NAME = "cartservice"
+    FE_SVC_NAME = "${APP_NAME}-cartservice"
     CLUSTER = "cluster-1"
     CLUSTER_ZONE = "us-central1-c"
     IMAGE_TAG = "gcr.io/${PROJECT}/${APP_NAME}"
@@ -64,7 +64,7 @@ spec:
         container('kubectl') {
           
           sh "gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project ordinal-torch-377801"
-          sh "kubectl apply -f frontend.yaml"
+          sh "kubectl apply -f cartservice.yaml"
         }
       }
     }
