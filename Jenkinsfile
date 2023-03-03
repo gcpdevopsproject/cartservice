@@ -52,6 +52,13 @@ spec:
         }
       }
     }
+     stage('SonarQube analysis') {
+       steps {
+         withSonarQubeEnv('My SonarQube Server') {
+           sh 'mvn sonar:sonar'
+          }
+        }
+      }
     
     stage('Build and push image with Container Builder') {
       steps {
