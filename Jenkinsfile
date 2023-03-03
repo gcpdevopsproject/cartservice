@@ -24,7 +24,7 @@ spec:
   # Use service account that can deploy to all namespaces
   # serviceAccountName: cd-jenkins
   containers:
-  - name: gradle-bld
+  - name: maven-bld
     image: openjdk:latest
     command:
     - cat
@@ -45,7 +45,7 @@ spec:
   stages {
     stage('codebuild') {
       steps {
-        container('gradle-bld') {
+        container('maven-bld') {
           sh """
              ls -a && pwd 
           """
@@ -54,7 +54,7 @@ spec:
     }
      stage('SonarQube analysis') {
        steps {
-         withSonarQubeEnv('My SonarQube Server') {
+         withSonarQubeEnv('sonarqube') {
            sh 'mvn sonar:sonar'
           }
         }
